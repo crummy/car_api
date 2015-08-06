@@ -1,11 +1,68 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  description: MyString
-  latitude: 1.5
-  longitude: 1.5
+  description: 5 Long Drive at 20,30
+  latitude: 20
+  longitude: 30
 
 two:
-  description: MyString
-  latitude: 1.5
-  longitude: 1.5
+  description: 22A Bigglesworth St at 10,5
+  latitude: 10
+  longitude: 5
+
+three:
+  description: 23A Bigglesworth St
+  latitude: 11
+  longitude: 5
+
+four:
+  description: Top Of The Hill
+  latitude: 100
+  longitude: 55
+
+five:
+  description: 6 Malibu St
+  latitude: 13
+  longitude: 5
+
+six:
+  description: Around the Corner
+  latitude: 1
+  longitude: 2
+
+seven:
+  description: 999 Street Avenue
+  latitude: 99
+  longitude: 9
+
+
+eight:
+  description: 999 Avenue Street
+  latitude: 9
+  longitude: 99
+
+nine:
+  description: Space Street
+  latitude: 92
+  longitude: 44
+
+ten:
+  description: Tenth Road
+  latitude: 93
+  longitude: 33
+
+eleven:
+  description: 11th Road
+  latitude: 95
+  longitude: 3
+
+twelve:
+  description: 12th and Secret
+  latitude: 34
+  longitude: 69
+
+
+
+
+
+
