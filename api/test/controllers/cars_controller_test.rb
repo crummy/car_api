@@ -7,15 +7,20 @@ class CarsControllerTest < ActionController::TestCase
     assert_response :bad_request
   end
 
+  test "get index with location out of range" do
+    get :index, location: "369,0"
+    assert_response: :bad_request
+  end
+
   test "get index with location" do
-    get :index, location: "0,0"
+    get :index, location: "25,35"
     body = JSON.parse(response.body)
     assert_equal 10, body['cars'].length
     assert_response :success
   end
 
   test "get closest" do
-    get :index, location: "10.1,4.9"
+    get :index, location: "21.1,31.1"
     body = JSON.parse(response.body)
     assert_equal cars(:two)['description'], body['cars'][0]['description']
 

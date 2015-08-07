@@ -6,12 +6,19 @@ class CarsController < ApplicationController
       latitude, longitude = params['location'].split(",")
       latitude = latitude.to_f
       longitude = longitude.to_f
-      render json: {"cars" => cars_near(Car.all, latitude, longitude, 10)}, except: [:id, :created_at, :updated_at]
+      unless (-180..180).include? latitude and (-90..90).include? longitude
+        raise RangeError
+      end
+      render json: {"cars" => cars_near(latitude, longitude)}, except: [:id, :created_at, :updated_at]
   
     rescue ActionController::ParameterMissing => error
-      render json: {"error" => "Invalid parameters: #{error}"}, status: :bad_request
+      render json: {"error" => "Missing parameters: #{error}"}, status: :bad_request
 
-    end 
+    rescue RangeError
+      render json: {"error" => "Parameters out of range"}, status: :bad_request
+    
+    end
+
   end
 
   def not_found
@@ -19,8 +26,18 @@ class CarsController < ApplicationController
   end
 
   private
-    def cars_near(cars, latitude, longitude, count)
-      nearestCars = cars.sort_by {|car| distance_between(car[:latitude], car[:longitude], latitude, longitude) }
+    def cars_near(lat, lon, count=10)
+      searchRadius = 0.01
+      maxRadius = 30
+      nearestCars = []
+      while nearestCars.length < count and searchRadius < maxRadius do
+        # [] + to convert to an array, to allow for in-place sort_by later
+        nearestCars = [] + Car.where(latitude: (lat-searchRadius..lat+searchRadius), longitude: (lon-searchRadius..lon+searchRadius))
+        searchRadius *= 2
+      end
+      nearestCars.sort_by! do |car|
+        distance_between(car[:latitude], car[:longitude], lat, lon)
+      end
       return nearestCars[0..count-1]
     end
 

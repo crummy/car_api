@@ -7,59 +7,59 @@ one:
 
 two:
   description: 22A Bigglesworth St at 10,5
-  latitude: 10
-  longitude: 5
+  latitude: 21
+  longitude: 31
 
 three:
   description: 23A Bigglesworth St
-  latitude: 11
-  longitude: 5
+  latitude: 22
+  longitude: 32
 
 four:
   description: Top Of The Hill
-  latitude: 100
-  longitude: 55
+  latitude: 23
+  longitude: 33
 
 five:
   description: 6 Malibu St
-  latitude: 13
-  longitude: 5
+  latitude: 24
+  longitude: 34
 
 six:
   description: Around the Corner
-  latitude: 1
-  longitude: 2
+  latitude: 25
+  longitude: 35
 
 seven:
   description: 999 Street Avenue
-  latitude: 99
-  longitude: 9
+  latitude: 26
+  longitude: 36
 
 
 eight:
   description: 999 Avenue Street
-  latitude: 9
-  longitude: 99
+  latitude: 27
+  longitude: 37
 
 nine:
   description: Space Street
-  latitude: 92
-  longitude: 44
+  latitude: 28
+  longitude: 38
 
 ten:
   description: Tenth Road
-  latitude: 93
-  longitude: 33
+  latitude: 29
+  longitude: 39
 
 eleven:
   description: 11th Road
-  latitude: 95
-  longitude: 3
+  latitude: 30
+  longitude: 40
 
 twelve:
   description: 12th and Secret
-  latitude: 34
-  longitude: 69
+  latitude: 31
+  longitude: 32
 
 
 

@@ -11,6 +11,10 @@ data = JSON.parse(File.read(jsonPath))
 data['locations'].each do |location|
   vehicleCount = location['vehicleCount'].to_i
   (0..vehicleCount).each do
-    Car.create(description: location['description'], latitude: location['latitude'], longitude: location['longitude'])
+    Car.create!(description: location['description'], latitude: location['latitude'], longitude: location['longitude'])
   end
 end
+# for load testing:
+#(0..10000).each do |i|
+#  Car.create!(description: "car number #{i}", latitude: rand(0..89.99), longitude: rand(0..179.99))
+#end
