@@ -15,6 +15,6 @@ data['locations'].each do |location|
   end
 end
 # for load testing:
-#(0..10000).each do |i|
-#  Car.create!(description: "car number #{i}", latitude: rand(0..89.99), longitude: rand(0..179.99))
-#end
+(0..10000).each do |i|
+  Car.create!(description: "car number #{i}", latitude: rand(-90..90), longitude: rand(-180..180))
+end

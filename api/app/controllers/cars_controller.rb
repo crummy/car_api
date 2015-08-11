@@ -1,3 +1,5 @@
+require 'haversine'
+
 class CarsController < ApplicationController
 
   def index
@@ -6,7 +8,7 @@ class CarsController < ApplicationController
       latitude, longitude = params['location'].split(",")
       latitude = latitude.to_f
       longitude = longitude.to_f
-      unless (-180..180).include? latitude and (-90..90).include? longitude
+      unless (-90..90).include? latitude and (-180..180).include? longitude
         raise RangeError
       end
       render json: {"cars" => cars_near(latitude, longitude)}, except: [:id, :created_at, :updated_at]
@@ -31,18 +33,24 @@ class CarsController < ApplicationController
       maxRadius = 30
       nearestCars = []
       while nearestCars.length < count and searchRadius < maxRadius do
-        # [] + to convert to an array, to allow for in-place sort_by later
-        nearestCars = [] + Car.where(latitude: (lat-searchRadius..lat+searchRadius), longitude: (lon-searchRadius..lon+searchRadius))
+        # define a search area by its north, south, east and west edges
+        north = lat + searchRadius
+        south = lat - searchRadius
+        west = lon - searchRadius
+        east = lon + searchRadius
+        if west < -180 then
+          nearestCars = Car.where(latitude: (south..north), longitude: (west+360..180)) + Car.where(latitude: (south..north), longitude: (-180..east))
+        elsif east > 180 then
+          nearestCars = Car.where(latitude: (south..north), longitude: (-180..east-360)) + Car.where(latitude: (south..north), longitude: (west..180))
+        else
+          nearestCars = [] + Car.where(latitude: (south..north), longitude: (west..east))
+        end
         searchRadius *= 2
       end
       nearestCars.sort_by! do |car|
-        distance_between(car[:latitude], car[:longitude], lat, lon)
+        Haversine.distance(car[:latitude], car[:longitude], lat, lon)
       end
       return nearestCars[0..count-1]
-    end
-
-    def distance_between(x1, y1, x2, y2)
-      Math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
     end
 
 end
