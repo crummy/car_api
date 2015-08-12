@@ -13,7 +13,7 @@ To run the server locally, in development mode:
 3. `rake db:schema:load` - Generate database with cars table
 4. `rake db:seed` - Seed the database with default car locations
 5. `rails server` - Host the API
-6. Make a GET request to `[/cars?location=51.5444204,-0.22707](/cars?location=51.5444204,-0.22707)` for example
+6. Make a GET request to [/cars?location=51.5444204,-0.22707](/cars?location=51.5444204,-0.22707) for example
 
 To execute tests, run `rake test`.
 
