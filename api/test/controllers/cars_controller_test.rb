@@ -21,6 +21,17 @@ class CarsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "get closest" do
+    get :index, location: "21.1,31.1"
+    body = JSON.parse(response.body)
+    assert_equal cars(:two)['description'], body['cars'][0]['description']
+
+    get :index, location: "21,30"
+    body = JSON.parse(response.body)
+    assert_equal cars(:one)['description'], body['cars'][0]['description']
+    assert_equal cars(:two)['description'], body['cars'][1]['description']
+  end
+
   test "get car on far side of the world" do
     get :index, location: "-1,179.99"
     body = JSON.parse(response.body)
@@ -31,15 +42,10 @@ class CarsControllerTest < ActionController::TestCase
     assert_equal cars(:thirteen)['description'], body['cars'][0]['description']
   end
 
-  test "get closest" do
-    get :index, location: "21.1,31.1"
+  test "get car at north pole" do
+    get :index, location: "89.9,-5"
     body = JSON.parse(response.body)
-    assert_equal cars(:two)['description'], body['cars'][0]['description']
-
-    get :index, location: "21,30"
-    body = JSON.parse(response.body)
-    assert_equal cars(:one)['description'], body['cars'][0]['description']
-    assert_equal cars(:two)['description'], body['cars'][1]['description']
+    assert_equal cars(:fourteen)['description'], body['cars'][0]['description']
   end
 
 end
