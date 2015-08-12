@@ -2,10 +2,16 @@
 
 An implementation of the Cars API project for Ally: a Rails app that hosts a database of cars with locations which exposes an API to return the nearest 10 cars to a given location.
 
+## Requirements
+
+* Ruby 2.0.0
+
 ## Instructions
 
 * `cd api` - Enter the subdirectory that contains the Rails app
-* `bundle install` - Install required dependencies (if necessary: `sudo gem install bundler`)
+* `bundle install` - Install required dependencies
+** If `bundle` is not found, `sudo gem install bundler`
+* `rake db:schema:load`
 * `rake db:seed` - Seed the database with default car locations
 * `rails server` - Host the API
 * Make a GET request to /cars?location=51.5444204,-0.22707 for example

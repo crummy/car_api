@@ -10,7 +10,7 @@ jsonPath = "../data.json"
 data = JSON.parse(File.read(jsonPath))
 data['locations'].each do |location|
   vehicleCount = location['vehicleCount'].to_i
-  (0..vehicleCount).each do
+  (1..vehicleCount).each do
     Car.create!(description: location['description'], latitude: location['latitude'], longitude: location['longitude'])
   end
 end
